@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- 启用 WebApp 全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!--隐藏状态栏/设置状态栏颜色：只有在开启WebApp全屏模式时才生效。content的值为default | black | black-translucent 。-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <!--页面缩放-->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <!--忽略自动识别邮箱与手机号码-->
+    <meta name="format-detection" content="telephone=no,email=no">
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- UC强制全屏 -->
+    <meta name="full-screen" content="yes">
+    <!-- QQ强制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+    <!-- UC应用模式 -->
+    <meta name="browsermode" content="application">
+    <!-- QQ应用模式 -->
+    <meta name="x5-page-mode" content="app">
+    <title>Loocon frame</title>
+    <script>document.write('<link rel="stylesheet" href="css/page.css?v=' + (localStorage['__cache_name__'] || Date.now()) + '"/>')</script>
+</head>
+<body class="index">
+    <img src="images/icon-success.png" id="success-image" class="success-image" alt=""/>
+    <!--start wrap-->
+    <div class="wrap" id="wrap"></div>
+    <!--wrap end -->
+    <script src="js/sea.js"></script>
+    <script>seajs.use('index')</script>
+</body>
+</html>

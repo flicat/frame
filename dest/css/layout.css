@@ -1,0 +1,6 @@
+@charset "utf-8";/*!
+ * @author liyuelong1020@gmail.com
+ * @date 15-6-19 下午2:44
+ * @version 1.0.0
+ * @description style 
+ */.wrap,body,html{height:100%}html{font:400 5vw/1.5em RobotoRegular,'Helvetica Neue',sans-serif}body,html{width:100%;overflow:hidden;position:relative}.flex,.wrap{width:100%;overflow-x:hidden;overflow-y:auto}.box{display:-webkit-box;display:box;-webkit-box-orient:vertical;box-orient:vertical;-webkit-box-pack:center;box-pack:center;-webkit-box-align:center;box-align:center;-webkit-box-lines:single;box-lines:single}.flex{position:absolute;left:0;top:0;-webkit-box-flex:1;box-flex:1}
