@@ -26,6 +26,12 @@ html * {
     background-image:         linear-gradient(to top, #aa0e12, #cf313b);
 }
 
+/* 隐藏原生滚动条
+ **********************************************************************/
+::-webkit-scrollbar{
+    opacity: 0;
+}
+
 /* 公共组件
  **********************************************************************/
 .hide {
@@ -47,6 +53,10 @@ html * {
 
 /* 表单
  **********************************************************************/
+input {
+    -webkit-user-modify: read-write-plaintext-only;
+    -webkit-appearance: none;
+}
 input:focus,
 input:active,
 input:hover {
@@ -54,10 +64,6 @@ input:hover {
 }
 input::-webkit-input-placeholder {
     color: #9fa0a0;
-}
-input[type="number"] {
-    -webkit-appearance: none;
-    appearance:         none;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button{

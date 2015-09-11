@@ -27,6 +27,7 @@ body {
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;  /* 快速回弹滚动 */
 }
 
 /* box 盒模型
