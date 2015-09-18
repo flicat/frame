@@ -54,7 +54,6 @@ html * {
 /* 表单
  **********************************************************************/
 input {
-    -webkit-user-modify: read-write-plaintext-only;
     -webkit-appearance: none;
 }
 input:focus,

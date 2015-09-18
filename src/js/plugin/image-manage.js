@@ -27,9 +27,6 @@ define(function (require, exports) {
         var exif = EXIF.readFromBinaryFile(binaryData);
         var orientation = exif.Orientation;
 
-        photo.width = width;
-        photo.height = height;
-
         //缩略尺寸
         var mpImg = new MegaPixImage(img);
 
