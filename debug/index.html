@@ -23,14 +23,20 @@
     <!-- QQ应用模式 -->
     <meta name="x5-page-mode" content="app">
     <title>Loocon frame</title>
-    <script>document.write('<link rel="stylesheet" href="css/page.css?v=' + (localStorage['__cache_name__'] || Date.now()) + '"/>')</script>
+    <script type="text/javascript">
+        // 如果是PC端则跳转至PC站
+        if(/win|mac/ig.test(navigator.platform)){
+            window.location = 'http://p.cgbfriday.com/';
+        }
+    </script>
+    <script>document.write('<link rel="stylesheet" href="css/page.css?' + (localStorage['__cache_name__'] || Date.now()) + '"/>')</script>
 </head>
 <body class="index">
     <img src="images/icon-success.png" id="success-image" class="success-image" alt=""/>
     <!--start wrap-->
     <div class="wrap" id="wrap"></div>
     <!--wrap end -->
-    <script src="js/sea.js"></script>
+    <script>document.write('<scri' + 'pt src="js/sea.js?' + (localStorage['__cache_name__'] || Date.now()) + '"></sc' + 'ript>')</script>
     <script>seajs.use('index')</script>
 </body>
 </html>

@@ -101,7 +101,52 @@ input::-webkit-inner-spin-button{
     color: #aaa;
     background: #fef;
 }
-
+.btn-wrap {
+    text-align: center;
+    width: 100%;
+    padding: 0.8rem 0;
+}
+.btn-wrap .btn:not(:first-child) {
+    margin-left: 1.75rem;
+}
+/* icon-music */
+@-webkit-keyframes music {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform:         rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(-360deg);
+        transform:         rotate(-360deg);
+    }
+}
+@keyframes music {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform:         rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(-360deg);
+        transform:         rotate(-360deg);
+    }
+}
+.icon-music {
+    position: absolute;
+    top: 2.2rem;
+    left: 0;
+    z-index: 10;
+    width: 4rem;
+    height: 4rem;
+    display: block;
+    background: url(../images/icon-music.png) no-repeat 50% 50%;
+    background-size: 1rem 1rem;
+}
+.icon-music-animation {
+    -webkit-transform-origin: 50% 50%;
+    transform-origin:         50% 50%;
+    -webkit-animation: music 2s linear 0s infinite;
+    animation:         music 2s linear 0s infinite;
+}
 /* 弹窗
  **********************************************************************/
 .popup {
@@ -164,4 +209,13 @@ input::-webkit-inner-spin-button{
 .popup-loading {
     background: url(../images/loading.gif) no-repeat center center rgba(0,0,0,0.8);
     background-size: 3em 3em;
+}
+.popup-landscape {
+    background: #fff;
+}
+.popup-landscape .popup-content {
+    background: url(../images/bg-landscape.png) no-repeat  50% 0;
+    background-size: contain;
+    padding-top: 36%;
+    font: 400 0.6rem/1em 'sans-serif';
 }

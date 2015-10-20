@@ -46,12 +46,10 @@ body {
 }
 .flex {
     width: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
+    height: auto;
+    position: relative;
     -webkit-box-flex: 1;
     box-flex:         1;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: hidden;
 }
 

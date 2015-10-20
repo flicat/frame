@@ -5,12 +5,12 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
 
         clean: {
-            html: ["dest/*.html"],
-            images: ["dest/images"],
-            css: ["dest/css/*.css"],
-            js: ["dest/js/*.js"],
-            module: ["dest/js/module/*.js"],
-            plugin: ["dest/js/plugin/*.js"]
+            html: ["./*.html"],
+            images: ["./images"],
+            css: ["./css/*.css"],
+            js: ["./js/*.js"],
+            module: ["./js/module/*.js"],
+            plugin: ["./js/plugin/*.js"]
         },
         imagemin: {                          // Task
             target: {                         // Another target
@@ -19,9 +19,9 @@ module.exports = function(grunt) {
                 },
                 files: [{
                     expand: true,                  // Enable dynamic expansion
-                    cwd: 'src/images/',
+                    cwd: 'debug/images/',
                     src: ['*.{png,jpg,gif}'],
-                    dest: 'dest/images/'
+                    dest: './images/'
                 }]
             }
         },
@@ -35,9 +35,9 @@ module.exports = function(grunt) {
                 },
                 files: [{
                     expand: true,                  // Enable dynamic expansion
-                    cwd: 'src/',
+                    cwd: 'debug/',
                     src: ['*.html'],
-                    dest: 'dest/'
+                    dest: './'
                 }]
             }
         },
@@ -45,9 +45,9 @@ module.exports = function(grunt) {
             target: {
                 files: [{
                     expand: true,
-                    cwd: 'src/css',
+                    cwd: 'debug/css',
                     src: ['*.css'],
-                    dest: 'dest/css/'
+                    dest: './css/'
                 }]
             }
         },
@@ -59,46 +59,46 @@ module.exports = function(grunt) {
             },
             js: {
                 expand: true,
-                cwd: 'src/js',
+                cwd: 'debug/js',
                 src: ['*.js'],
-                dest: 'dest/js/'
+                dest: './js/'
             },
             module: {
                 expand: true,
-                cwd: 'src/js/module',
+                cwd: 'debug/js/module',
                 src: ['*.js'],
-                dest: 'dest/js/module/'
+                dest: './js/module/'
             },
             plugin: {
                 expand: true,
-                cwd: 'src/js/plugin',
+                cwd: 'debug/js/plugin',
                 src: ['*.js'],
-                dest: 'dest/js/plugin/'
+                dest: './js/plugin/'
             }
         },
         watch: {
             html: {
-                files: 'src/*.html',
+                files: 'debug/*.html',
                 tasks: ['clean:html', 'htmlmin']
             },
             images: {
-                files: 'src/images/*',
+                files: 'debug/images/*',
                 tasks: ['clean:images', 'imagemin']
             },
             css: {
-                files: 'src/css/*.css',
+                files: 'debug/css/*.css',
                 tasks: ['clean:css', 'cssmin']
             },
             js: {
-                files: 'src/js/*.js',
+                files: 'debug/js/*.js',
                 tasks: ['clean:js', 'uglify:js']
             },
             module: {
-                files: 'src/js/module/*.js',
+                files: 'debug/js/module/*.js',
                 tasks: ['clean:module', 'uglify:module']
             },
             plugin: {
-                files: 'src/js/plugin/*.js',
+                files: 'debug/js/plugin/*.js',
                 tasks: ['clean:plugin', 'uglify:plugin']
             }
         }
