@@ -25,23 +25,25 @@
         // 配置别名
         alias: {
             // module
-            index: 'module/index.js?' + cacheName,
+            index: 'module/index.js?' + cacheName,                      // 首页模块
 
             // plugin
-            ajax: 'plugin/ajax.js?' + cacheName,
-            event: 'plugin/event.js?' + cacheName,
-            share: 'plugin/share.js?' + cacheName,
-            voice: 'plugin/voice.js?' + cacheName,
-            weixin: 'plugin/weixin.js?' + cacheName,
-            jweixin: 'plugin/jweixin-1.0.0.js?' + cacheName,
-            popup: 'plugin/popup.js?' + cacheName,
-            log: 'plugin/log.js?' + cacheName,
-            validate: 'plugin/validate.js?' + cacheName,
-            image_manage: 'plugin/image-manage.js?' + cacheName,
-            megapix: 'plugin/megapix-image.js?' + cacheName,
-            pkgd: 'plugin/imagesloaded-pkgd.js?' + cacheName,
-            binaryajax: 'plugin/binaryajax.js?' + cacheName,
-            exif: 'plugin/exif.js?' + cacheName
+            template: 'plugin/template.js?' + cacheName,                // js 模板插件
+            ajax: 'plugin/ajax.js?' + cacheName,                        // ajax 插件
+            event: 'plugin/event.js?' + cacheName,                      // 手机触摸事件插件
+            share: 'plugin/share.js?' + cacheName,                      // 分享插件
+            voice: 'plugin/voice.js?' + cacheName,                      // 微信语音插件
+            music: 'plugin/music.js?' + cacheName,                      // 音频播放插件
+            weixin: 'plugin/weixin.js?' + cacheName,                    // 微信授权
+            jweixin: 'plugin/jweixin-1.0.0.js?' + cacheName,            // 微信 jssdk
+            popup: 'plugin/popup.js?' + cacheName,                      // 弹窗插件
+            log: 'plugin/log.js?' + cacheName,                          // 调试信息插件
+            validate: 'plugin/validate.js?' + cacheName,                // 表单验证
+            image_manage: 'plugin/image-manage.js?' + cacheName,        // 图片
+            megapix: 'plugin/megapix-image.js?' + cacheName,            // 图片
+            pkgd: 'plugin/imagesloaded-pkgd.js?' + cacheName,           // 图片
+            binaryajax: 'plugin/binaryajax.js?' + cacheName,            // 图片
+            exif: 'plugin/exif.js?' + cacheName                         // 图片
         }
     });
 

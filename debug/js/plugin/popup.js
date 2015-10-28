@@ -83,11 +83,15 @@ define(function(require, exports, module) {
             popupElem.show(msg);
             popupElem.onHide = callback;
         },
-        loading: function(act, msg, callback) {
+        loading: function(act) {
             type = 'loading';
             popupContentElem.className = 'popup-content popup-loading';
-            popupElem[act] && popupElem[act](msg || '数据加载中，请稍候…');
-            popupElem.onHide = callback;
+            popupElem[act] && popupElem[act]();
+        },
+        share: function(act) {
+            type = 'share';
+            popupContentElem.className = 'popup-content popup-share';
+            popupElem[act] && popupElem[act]();
         }
     }
 });

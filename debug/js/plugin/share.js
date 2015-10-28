@@ -8,6 +8,34 @@ define(function(require, exports) {
     var weixin = require('weixin');
 
     return {
+
+        // 分享到QQ好友
+        qq: function(param) {
+            var options = {
+                url: location.href,         /* 获取URL，可加上来自分享到QQ标识，方便统计 */
+                desc: '',                   /* 分享理由(风格应模拟用户对话),支持多分享语随机展现（使用|分隔）*/
+                title: '',                  /* 分享标题(可选) */
+                summary: '',                /* 分享摘要(可选) */
+                pics: '',                   /* 分享图片(可选) */
+                flash: '',                  /* 视频地址(可选) */
+                site: '',                   /* 分享来源(可选) 如：QQ分享 */
+                style: '201',
+                width: 32,
+                height: 32
+            };
+
+            var str = [];
+            for(var i in options){
+                if(options.hasOwnProperty(i)){
+                    str.push(i + '=' + encodeURIComponent(param[i] || options[i]));
+                }
+            }
+
+            setTimeout(function() {
+                window.location = 'http://connect.qq.com/widget/shareqq/index.html?' + str.join('&')
+            }, 0);
+        },
+
         // 分享新浪微博
         sina: function(text, url, pic) {      // 描述文字，分享链接，分享图片
             // 新浪微博分享链接
@@ -21,8 +49,11 @@ define(function(require, exports) {
             pic && paramStr.push("pic=" + encodeURIComponent(pic));
 
 //            window.open(linkStr + paramStr.join('&'));
-            window.location = linkStr + paramStr.join('&');
+            setTimeout(function() {
+                window.location = linkStr + paramStr.join('&');
+            }, 0);
         },
+
         // 绑定微信分享事件
         bindWeixin: function(param) {
             /**
