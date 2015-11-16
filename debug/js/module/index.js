@@ -8,6 +8,7 @@
 define(function(require, exports) {
     var log = require('log');
     var event = require('event');
+    var popup = require('popup');
 
     var imageURI = [
         seajs.data.cwd + 'bg-share.png',

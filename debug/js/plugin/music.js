@@ -16,7 +16,8 @@ define(function (require, exports) {
     };
 
     var isIOS = /i(Phone|P(o|a)d)/.test(navigator.userAgent);                     // 是否是爱疯
-    var currentTime = Number(sessionStorage['music_current_time']) || 0;          // 是否播放
+    var currentTime = Number(sessionStorage['music_current_time']) || 0;          // 上一次播放时间
+    var play_state = sessionStorage['music_play_state'];                          // 上一次播放状态
 
 
     // 新建图标
@@ -31,47 +32,54 @@ define(function (require, exports) {
         var isPlay = false;            // 是否播放
 
         // 页面背景音乐
-        var audio = new Audio();
+        var audio = new Audio(src);
         audio.loop = !!loop;
         audio.autoplay = false;
-        audio.previousSrc = src;
-        audio.src = src;
-        audio.load();
 
         // 音乐播放图标
         var icon = initMusicIcon();
 
         // 播放音乐
         var play = function() {
+            isPlay = true;
             audio.play();
         };
 
         // 暂停音乐
         var pause = function() {
+            isPlay = false;
             audio.pause();
+        };
+
+        // 停止音乐
+        var stop = function() {
+            isPlay = false;
+            audio.pause();
+            audio.previousTime = 0;
+            audio.currentTime  = 0;
         };
 
         // 修改播放图标
         var setPlayState = function() {
-            isPlay = true;
             icon.classList.add('icon-music-animation');
         };
 
         // 修改播放图标
         var setStopState = function() {
-            isPlay = false;
             icon.classList.remove('icon-music-animation');
+        };
+
+        // 断点续播
+        var continuePlay = function() {
+            currentTime ? isIOS ? audio.previousTime = currentTime : audio.currentTime  = currentTime : null;
         };
 
         audio.addEventListener('playing', setPlayState, false);      // 开始播放事件
         audio.addEventListener('ended', setStopState, false);        // 结束播放事件
         audio.addEventListener('pause', setStopState, false);        // 暂停事件
-        audio.addEventListener('loadeddata', function() {
-            // 音乐文件加载完毕
-            currentTime ? isIOS ? audio.previousTime = currentTime : audio.currentTime  = currentTime : null;
-        }, false);
+        audio.addEventListener('loadeddata', continuePlay, false);   // 音乐文件加载完毕
 
-        if(autoPlay){
+        if((!play_state || play_state === 'play') && autoPlay){
             play();
             // 解决某些手机不支持自动播放音乐的 bug
             if(isIOS) {
@@ -84,8 +92,10 @@ define(function (require, exports) {
             e.stopPropagation();
             e.preventDefault();
 
+            sessionStorage['music_play_state'] = !isPlay ? 'play' : 'stop';
+
             if(isPlay){
-                pause();
+                stop();
             } else {
                 play();
             }
@@ -98,11 +108,15 @@ define(function (require, exports) {
             } else {
                 sessionStorage['music_current_time'] = audio.currentTime;
             }
+
+            audio.pause();
+            audio = null;
         });
 
         return {
             play: play,
-            pause: pause
+            pause: pause,
+            stop: stop
         }
     }
 });

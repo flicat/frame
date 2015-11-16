@@ -88,10 +88,10 @@ define(function(require, exports, module) {
             popupContentElem.className = 'popup-content popup-loading';
             popupElem[act] && popupElem[act]();
         },
-        share: function(act) {
+        share: function() {
             type = 'share';
             popupContentElem.className = 'popup-content popup-share';
-            popupElem[act] && popupElem[act]();
+            popupElem.show();
         }
     }
 });

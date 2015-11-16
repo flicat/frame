@@ -8,6 +8,7 @@
  * @description seajs 配置文件
  */
 (function(seajs) {
+    var version = 'v3.0.0';
 
     // 清除缓存
     var cache = decodeURI((location.search.substr(1).match(/(^|&)cache=([^&]*)(&|$)/) || [])[2] || '');

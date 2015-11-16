@@ -8,6 +8,29 @@
 define(function(require, exports) {
     var log, textarea, icon;
     var isHidden = true;
+
+    var showLog = function() {
+        if(!textarea || !icon){
+            createLog();
+        }
+        textarea.style.display = '';
+        icon.innerHTML = '&times;';
+        icon.style.left = 'auto';
+        icon.style.right = 0;
+        isHidden = false;
+    };
+
+    var hideLog = function() {
+        if(!textarea || !icon){
+            createLog();
+        }
+        textarea.style.display = 'none';
+        icon.style.left = 0;
+        icon.style.right = 'auto';
+        icon.innerHTML = '&gt;';
+        isHidden = true;
+    };
+
     var createLog = function() {
 
         textarea = document.createElement('textarea');
@@ -27,17 +50,9 @@ define(function(require, exports) {
 
         icon.addEventListener('click', function(e) {
             if(!isHidden){
-                textarea.style.display = 'none';
-                icon.style.left = 0;
-                icon.style.right = 'auto';
-                icon.innerHTML = '&gt;';
-                isHidden = true;
+                hideLog();
             } else {
-                textarea.style.display = '';
-                icon.innerHTML = '&times;';
-                icon.style.left = 'auto';
-                icon.style.right = 0;
-                isHidden = false;
+                showLog();
             }
         }, false);
     };
@@ -48,8 +63,7 @@ define(function(require, exports) {
 
     return function(obj) {
         var val = '';
-        !log && createLog();
-        isHidden && (textarea.style.display = '');
+        showLog();
         [].slice.call(arguments).forEach(function(arg) {
             if(is('String', arg) || is('Number', arg) || is('Boolean', arg)){
                 val += arg + '\n';
@@ -57,6 +71,6 @@ define(function(require, exports) {
                 val += JSON.stringify(arg, null, '    ') + '\n';
             }
         });
-        textarea.value += val;
+        textarea.value = val + textarea.value;
     };
 });
