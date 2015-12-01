@@ -22,13 +22,3 @@ body {
     height: 100%;
     overflow: hidden;
 }
-.success-image {
-    position: absolute;
-    width: 320px;
-    height: 320px;
-    left: 50%;
-    top: 50%;
-    margin: -160px 0 0 -160px;
-    -webkit-transform-origin: 50% 50%;
-    transform-origin:         50% 50%;
-}

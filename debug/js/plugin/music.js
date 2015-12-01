@@ -29,7 +29,26 @@ define(function (require, exports) {
     };
 
     return function(src, loop, autoPlay) {
-        var isPlay = false;            // 是否播放
+        // 音乐控制对象
+        var act = {
+            isPlay: false,             // 是否播放
+            play: function() {
+                act.isPlay = true;
+                audio.play();
+            },
+            pause: function() {
+                act.isPlay = false;
+                audio.pause();
+            },
+            stop: function() {
+                act.isPlay = false;
+                audio.pause();
+                audio.previousTime = 0;
+                audio.currentTime  = 0;
+            },
+            onPlay: function() {},
+            onStop: function() {}
+        };
 
         // 页面背景音乐
         var audio = new Audio(src);
@@ -39,34 +58,16 @@ define(function (require, exports) {
         // 音乐播放图标
         var icon = initMusicIcon();
 
-        // 播放音乐
-        var play = function() {
-            isPlay = true;
-            audio.play();
-        };
-
-        // 暂停音乐
-        var pause = function() {
-            isPlay = false;
-            audio.pause();
-        };
-
-        // 停止音乐
-        var stop = function() {
-            isPlay = false;
-            audio.pause();
-            audio.previousTime = 0;
-            audio.currentTime  = 0;
-        };
-
         // 修改播放图标
         var setPlayState = function() {
             icon.classList.add('icon-music-animation');
+            act.onPlay();
         };
 
         // 修改播放图标
         var setStopState = function() {
             icon.classList.remove('icon-music-animation');
+            act.onStop();
         };
 
         // 断点续播
@@ -80,10 +81,10 @@ define(function (require, exports) {
         audio.addEventListener('loadeddata', continuePlay, false);   // 音乐文件加载完毕
 
         if((!play_state || play_state === 'play') && autoPlay){
-            play();
+            act.play();
             // 解决某些手机不支持自动播放音乐的 bug
             if(isIOS) {
-                oneBind(document, 'touchstart', play);
+                oneBind(document, 'touchstart', act.play);
             }
         }
 
@@ -92,12 +93,12 @@ define(function (require, exports) {
             e.stopPropagation();
             e.preventDefault();
 
-            sessionStorage['music_play_state'] = !isPlay ? 'play' : 'stop';
+            sessionStorage['music_play_state'] = !act.isPlay ? 'play' : 'stop';
 
-            if(isPlay){
-                stop();
+            if(act.isPlay){
+                act.stop();
             } else {
-                play();
+                act.play();
             }
         }, false);
 
@@ -113,10 +114,6 @@ define(function (require, exports) {
             audio = null;
         });
 
-        return {
-            play: play,
-            pause: pause,
-            stop: stop
-        }
+        return act;
     }
 });

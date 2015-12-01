@@ -116,8 +116,8 @@ input::-webkit-inner-spin-button{
         transform:         rotate(0deg);
     }
     100% {
-        -webkit-transform: rotate(-360deg);
-        transform:         rotate(-360deg);
+        -webkit-transform: rotate(360deg);
+        transform:         rotate(360deg);
     }
 }
 @keyframes music {
@@ -126,8 +126,8 @@ input::-webkit-inner-spin-button{
         transform:         rotate(0deg);
     }
     100% {
-        -webkit-transform: rotate(-360deg);
-        transform:         rotate(-360deg);
+        -webkit-transform: rotate(360deg);
+        transform:         rotate(360deg);
     }
 }
 .icon-music {
@@ -146,6 +146,33 @@ input::-webkit-inner-spin-button{
 .icon-music-animation {
     -webkit-animation: music 2s linear 0s infinite;
     animation:         music 2s linear 0s infinite;
+}
+/* 动画预设
+ **********************************************************************/
+.page .translate-left {
+    -webkit-transform: translateX(-100%);
+    transform:         translateX(-100%);
+}
+.page .translate-right {
+    -webkit-transform: translateX(100%);
+    transform:         translateX(100%);
+}
+.page .translate-bottom {
+    -webkit-transform: translate(0, 30rem);
+    transform:         translate(0, 30rem);
+}
+.page .translate-top {
+    -webkit-transform: translate(0, -30rem);
+    transform:         translate(0, -30rem);
+}
+.animate .translate-left,
+.animate .translate-right,
+.animate .translate-bottom,
+.animate .translate-top {
+    -webkit-transition: all 0.5s ease;
+    transition:         all 0.5s ease;
+    -webkit-transform: translate(0, 0);
+    transform:         translate(0, 0);
 }
 /* 弹窗
  **********************************************************************/

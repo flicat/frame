@@ -9,12 +9,36 @@ define(function(require, exports) {
     var log = require('log');
     var event = require('event');
     var popup = require('popup');
+    var share = require('share');
+
+    // 平台检测
+    var userAgent = window.navigator.userAgent;
+    var platform = {
+        isFromAndroid: /android/gi.test(userAgent),
+        isFromIos: /iphone|ipod|ios/gi.test(userAgent),
+        isFromWx: /MicroMessenger/gi.test(userAgent),
+        isFromQQ: /mobile.*qq/gi.test(userAgent),
+        isFromUC: /ucbrowser/gi.test(userAgent),
+        isFromQQBrower: /mqqbrowser[^LightApp]/gi.test(userAgent),
+        isFromQQBrowerLight: /MQQBrowserLightApp/gi.test(userAgent)
+    };
+
+    // 分享文案
+    var shareParam = new share({
+        title: '广发银行',
+        description: '华扬腾亚 特别制作',
+        img: seajs.data.cwd + 'images/icon-share.jpg',
+        url: seajs.data.cwd + 'index.html'
+    });
+    if(platform.isFromWx){
+        shareParam.bindWeixin();
+    }
 
     var imageURI = [
-        seajs.data.cwd + 'bg-share.png',
-        seajs.data.cwd + 'icon-fail.png',
-        seajs.data.cwd + 'icon-success.png',
-        seajs.data.cwd + 'loading.gif'
+        seajs.data.cwd + 'images/bg-share.png',
+        seajs.data.cwd + 'images/icon-fail.png',
+        seajs.data.cwd + 'images/icon-success.png',
+        seajs.data.cwd + 'images/loading.gif'
     ];
     var preloadImages = function(callback) {
         var imgLen = imageURI.length;
