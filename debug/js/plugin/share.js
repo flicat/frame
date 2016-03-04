@@ -524,7 +524,26 @@ define(function (require, exports) {
             }
         },
 
-        shareTxWb: function() {},
+        shareTxWb: function() {
+            var config = this.config;
+            // 腾讯微博分享链接
+            var linkStr = "http://share.v.t.qq.com/index.php?c=share&a=index&";
+            // 微博分享参数
+            var paramStr = [];
+
+            // 分享至微博
+            config.description && paramStr.push("title=" + encodeURIComponent(config.description));
+            config.url && paramStr.push("url=" + encodeURIComponent(config.url));
+            config.img && paramStr.push("pic=" + encodeURIComponent(config.img));
+
+            if(platform.isFromWx || platform.isFromQQ){
+                setTimeout(function() {
+                    window.location = linkStr + paramStr.join('&');
+                }, 0);
+            } else {
+                window.open(linkStr + paramStr.join('&'));
+            }
+        },
 
         shareQQ: function() {
             var url = this.shareUrlMap.qq, iframe = null;

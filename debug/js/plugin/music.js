@@ -16,9 +16,6 @@ define(function (require, exports) {
     };
 
     var isIOS = /i(Phone|P(o|a)d)/.test(navigator.userAgent);                     // 是否是爱疯
-    var currentTime = Number(sessionStorage['music_current_time']) || 0;          // 上一次播放时间
-    var play_state = sessionStorage['music_play_state'];                          // 上一次播放状态
-
 
     // 新建图标
     var initMusicIcon = function() {
@@ -28,92 +25,114 @@ define(function (require, exports) {
         return icon;
     };
 
-    return function(src, loop, autoPlay) {
-        // 音乐控制对象
-        var act = {
-            isPlay: false,             // 是否播放
-            play: function() {
-                act.isPlay = true;
-                audio.play();
-            },
-            pause: function() {
-                act.isPlay = false;
-                audio.pause();
-            },
-            stop: function() {
-                act.isPlay = false;
-                audio.pause();
-                audio.previousTime = 0;
-                audio.currentTime  = 0;
-            },
-            onPlay: function() {},
-            onStop: function() {}
-        };
+    // 音乐播放对象
+    var Music = function(src, loop, autoPlay) {
+        this.isPlay = false;
+        this.autoPlay = !!autoPlay;
 
         // 页面背景音乐
-        var audio = new Audio(src);
-        audio.loop = !!loop;
-        audio.autoplay = false;
+        this.audio = new Audio(src);
+        this.audio.loop = !!loop;
+        this.audio.autoplay = false;
 
         // 音乐播放图标
-        var icon = initMusicIcon();
+        this.icon = initMusicIcon();
 
+        this.timeStamp = 'music_current_time' + src;
+        this.stateStamp = 'music_play_state' + src;
+        this.currentTime = Number(sessionStorage[this.timeStamp]) || 0;          // 上一次播放时间
+        this.play_state = sessionStorage[this.stateStamp];                          // 上一次播放状态
+
+        this.init();
+    };
+    Music.prototype = {
+        constructor: Music,
+        onPlay: function() {},
+        onStop: function() {},
+        // 播放
+        play: function() {
+            this.isPlay = true;
+            this.audio.play();
+        },
+        // 暂停
+        pause: function() {
+            this.isPlay = false;
+            this.audio.pause();
+        },
+        // 停止
+        stop: function() {
+            this.isPlay = false;
+            this.audio.pause();
+            isIOS ? this.audio.previousTime = 0 : this.audio.currentTime  = 0;
+        },
         // 修改播放图标
-        var setPlayState = function() {
-            icon.classList.add('icon-music-animation');
-            act.onPlay();
-        };
-
+        setPlayState: function() {
+            this.icon.className = 'icon-music icon-music-animation';
+            this.onPlay();
+        },
         // 修改播放图标
-        var setStopState = function() {
-            icon.classList.remove('icon-music-animation');
-            act.onStop();
-        };
-
+        setStopState: function() {
+            this.icon.className = 'icon-music';
+            this.onStop();
+        },
         // 断点续播
-        var continuePlay = function() {
-            currentTime ? isIOS ? audio.previousTime = currentTime : audio.currentTime  = currentTime : null;
-        };
+        continuePlay: function() {
+            this.currentTime ?
+                isIOS ? this.audio.previousTime = this.currentTime :
+                    this.audio.currentTime  = this.currentTime : null;
+        },
+        // 初始化事件
+        init: function() {
+            var that = this;
 
-        audio.addEventListener('playing', setPlayState, false);      // 开始播放事件
-        audio.addEventListener('ended', setStopState, false);        // 结束播放事件
-        audio.addEventListener('pause', setStopState, false);        // 暂停事件
-        audio.addEventListener('loadeddata', continuePlay, false);   // 音乐文件加载完毕
+            that.audio.addEventListener('playing', function() {
+                that.setPlayState();
+            }, false);      // 开始播放事件
+            that.audio.addEventListener('ended', function() {
+                that.setStopState();
+            }, false);        // 结束播放事件
+            that.audio.addEventListener('pause', function() {
+                that.setStopState();
+            }, false);        // 暂停事件
+            that.audio.addEventListener('loadeddata', function() {
+                that.continuePlay();
+            }, false);        // 断点续播
 
-        if((!play_state || play_state === 'play') && autoPlay){
-            act.play();
-            // 解决某些手机不支持自动播放音乐的 bug
-            if(isIOS) {
-                oneBind(document, 'touchstart', act.play);
+            if((!that.play_state || that.play_state === 'play') && that.autoPlay){
+                that.play();
+                // 解决某些手机不支持自动播放音乐的 bug
+                if(isIOS) {
+                    oneBind(document, 'touchstart', function() {
+                        that.play();
+                    });
+                }
             }
+
+            // 点击播放/暂停音乐
+            that.icon.addEventListener('touchend', function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+
+                sessionStorage[that.stateStamp] = !that.isPlay ? 'play' : 'stop';
+                if(that.isPlay){
+                    that.stop();
+                } else {
+                    that.play();
+                }
+            }, false);
+
+            // 页面关闭时记录当前播放进度
+            window.addEventListener('beforeunload', function() {
+                if(isIOS) {
+                    sessionStorage[that.timeStamp] = that.audio.previousTime;
+                } else {
+                    sessionStorage[that.timeStamp] = that.audio.currentTime;
+                }
+
+                that.audio.pause();
+            });
         }
+    };
 
-        // 点击播放/暂停音乐
-        icon.addEventListener('touchend', function(e) {
-            e.stopPropagation();
-            e.preventDefault();
-
-            sessionStorage['music_play_state'] = !act.isPlay ? 'play' : 'stop';
-
-            if(act.isPlay){
-                act.stop();
-            } else {
-                act.play();
-            }
-        }, false);
-
-        // 页面关闭时记录当前播放进度
-        window.addEventListener('beforeunload', function() {
-            if(isIOS) {
-                sessionStorage['music_current_time'] = audio.previousTime;
-            } else {
-                sessionStorage['music_current_time'] = audio.currentTime;
-            }
-
-            audio.pause();
-            audio = null;
-        });
-
-        return act;
-    }
+    return Music;
 });
