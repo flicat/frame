@@ -16,7 +16,7 @@
         [].slice.call(document.querySelectorAll('link[rel="stylesheet"], script[src]')).forEach(function(node) {
             var xhr = new XMLHttpRequest();
             xhr.open('GET', node.href || node.src, true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.setRequestHeader('Content-Type', 'text/plain;charset=UTF-8');
             xhr.setRequestHeader("If-Modified-Since", "0");
             xhr.setRequestHeader("Cache-Control", "no-cache");
             xhr.send();
