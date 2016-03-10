@@ -21,12 +21,11 @@ define(function (require, exports) {
     var initMusicIcon = function() {
         var icon = document.createElement('i');
         icon.className = 'icon-music';
-        document.body.appendChild(icon);
         return icon;
     };
 
     // 音乐播放对象
-    var Music = function(src, loop, autoPlay) {
+    var Music = function(src, loop, autoPlay, icon) {
         this.isPlay = false;
         this.autoPlay = !!autoPlay;
 
@@ -37,6 +36,7 @@ define(function (require, exports) {
 
         // 音乐播放图标
         this.icon = initMusicIcon();
+        !!icon && document.body.appendChild(this.icon);
 
         this.timeStamp = 'music_current_time' + src;
         this.stateStamp = 'music_play_state' + src;

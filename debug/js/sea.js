@@ -8,15 +8,31 @@
  * @description seajs 配置文件
  */
 (function(seajs) {
-    var version = 'v3.0.0';
+    var version = '?v1.0.0';
 
-    // 清除缓存
-    var cache = decodeURI((location.search.substr(1).match(/(^|&)cache=([^&]*)(&|$)/) || [])[2] || '');
+    // 清除页面缓存
+    var getNewFiles = function() {
+        [].slice.call(document.querySelectorAll('link[rel="stylesheet"], script[src]')).forEach(function(node) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', node.href || node.src, true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.setRequestHeader("If-Modified-Since", "0");
+            xhr.setRequestHeader("Cache-Control", "no-cache");
+            xhr.send();
+        });
+    };
 
-    var cacheName = localStorage['__cache_name__'];
+    var cacheName = localStorage[version];
+    if(!cacheName){
+        cacheName = localStorage[version] = version;
+        getNewFiles();
+    }
+
     // 开启清缓存模式
-    if(cache || !cacheName || Date.now() - cacheName > 86400000){
-        cacheName = localStorage['__cache_name__'] = Date.now();
+    var clearCache = decodeURI((location.search.substr(1).match(/(^|&)cache=([^&]*)(&|$)/) || [])[2] || '');
+    if(clearCache){
+        cacheName = localStorage[version] = version + '.' + Date.now();
+        getNewFiles();
     }
 
     seajs.config({
@@ -26,25 +42,25 @@
         // 配置别名
         alias: {
             // module
-            index: 'module/index.js?' + cacheName,                      // 首页模块
+            index: 'module/index.js' + cacheName,                      // 首页模块
 
             // plugin
-            template: 'plugin/template.js?' + cacheName,                // js 模板插件
-            ajax: 'plugin/ajax.js?' + cacheName,                        // ajax 插件
-            event: 'plugin/event.js?' + cacheName,                      // 手机触摸事件插件
-            share: 'plugin/share.js?' + cacheName,                      // 分享插件
-            voice: 'plugin/voice.js?' + cacheName,                      // 微信语音插件
-            music: 'plugin/music.js?' + cacheName,                      // 音频播放插件
-            weixin: 'plugin/weixin.js?' + cacheName,                    // 微信授权
-            jweixin: 'plugin/jweixin-1.0.0.js?' + cacheName,            // 微信 jssdk
-            popup: 'plugin/popup.js?' + cacheName,                      // 弹窗插件
-            log: 'plugin/log.js?' + cacheName,                          // 调试信息插件
-            validate: 'plugin/validate.js?' + cacheName,                // 表单验证
-            image_manage: 'plugin/image-manage.js?' + cacheName,        // 图片
-            megapix: 'plugin/megapix-image.js?' + cacheName,            // 图片
-            pkgd: 'plugin/imagesloaded-pkgd.js?' + cacheName,           // 图片
-            binaryajax: 'plugin/binaryajax.js?' + cacheName,            // 图片
-            exif: 'plugin/exif.js?' + cacheName                         // 图片
+            template: 'plugin/template.js' + cacheName,                // js 模板插件
+            ajax: 'plugin/ajax.js' + cacheName,                        // ajax 插件
+            event: 'plugin/event.js' + cacheName,                      // 手机触摸事件插件
+            share: 'plugin/share.js' + cacheName,                      // 分享插件
+            voice: 'plugin/voice.js' + cacheName,                      // 微信语音插件
+            music: 'plugin/music.js' + cacheName,                      // 音频播放插件
+            weixin: 'plugin/weixin.js' + cacheName,                    // 微信授权
+            jweixin: 'plugin/jweixin-1.0.0.js' + cacheName,            // 微信 jssdk
+            popup: 'plugin/popup.js' + cacheName,                      // 弹窗插件
+            log: 'plugin/log.js' + cacheName,                          // 调试信息插件
+            validate: 'plugin/validate.js' + cacheName,                // 表单验证
+            image_manage: 'plugin/image-manage.js' + cacheName,        // 图片
+            megapix: 'plugin/megapix-image.js' + cacheName,            // 图片
+            pkgd: 'plugin/imagesloaded-pkgd.js' + cacheName,           // 图片
+            binaryajax: 'plugin/binaryajax.js' + cacheName,            // 图片
+            exif: 'plugin/exif.js' + cacheName                         // 图片
         }
     });
 
@@ -58,6 +74,7 @@
             isShow: false
         };
     })();
+
     window.onorientationchange = function() {
         if(window.orientation == '-90' || window.orientation == '90'){
             if(!landscape.isShow){
