@@ -44,13 +44,13 @@ define(function(require, exports) {
         var imgLen = imageURI.length;
         imageURI.forEach(function(src) {
             var img = new Image();
-            img.src = src;
             img.onload = img.onerror = function() {
                 imgLen--;
                 if(!imgLen){
                     callback();
                 }
             };
+            img.src = src;
         });
     };
 
