@@ -8,6 +8,7 @@
  * @description seajs 配置文件
  */
 (function(seajs) {
+    // 版本号
     var version = '?v1.0.0';
 
     // 清除页面缓存
