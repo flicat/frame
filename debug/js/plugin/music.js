@@ -63,7 +63,10 @@ define(function (require, exports) {
         stop: function() {
             this.isPlay = false;
             this.audio.pause();
-            isIOS ? this.audio.previousTime = 0 : this.audio.currentTime  = 0;
+            try {
+                this.audio.previousTime = 0;
+                this.audio.currentTime  = 0;
+            } catch(e) {}
         },
         // 修改播放图标
         setPlayState: function() {
@@ -77,9 +80,12 @@ define(function (require, exports) {
         },
         // 断点续播
         continuePlay: function() {
-            this.currentTime ?
-                isIOS ? this.audio.previousTime = this.currentTime :
-                    this.audio.currentTime  = this.currentTime : null;
+            if(this.currentTime){
+                try {
+                    this.audio.previousTime = this.currentTime;
+                    this.audio.currentTime  = this.currentTime;
+                } catch(e) {}
+            }
         },
         // 初始化事件
         init: function() {
@@ -123,12 +129,9 @@ define(function (require, exports) {
 
             // 页面关闭时记录当前播放进度
             window.addEventListener('beforeunload', function() {
-                if(isIOS) {
-                    sessionStorage[that.timeStamp] = that.audio.previousTime;
-                } else {
-                    sessionStorage[that.timeStamp] = that.audio.currentTime;
-                }
-
+                try {
+                    sessionStorage[that.timeStamp] = that.audio.previousTime || that.audio.currentTime;
+                } catch(e) {}
                 that.audio.pause();
             });
         }

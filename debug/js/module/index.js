@@ -91,20 +91,23 @@ define(function(require, exports) {
     };
 
     img.addEventListener('touchstart', handler);
-    img.addEventListener('swipe', handler);
+    img.addEventListener('touchmove', handler);
+    img.addEventListener('touchcancel', handler);
+    img.addEventListener('touchend', handler);
+    //img.addEventListener('swipe', handler);
 
-    var eventHandler = function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        wrap.innerHTML = e.type;
-    };
-    wrap.addEventListener('tap', eventHandler, false)
-        .addEventListener('longTap', eventHandler, false)
-        .addEventListener('swipe', eventHandler, false)
-        .addEventListener('swipeLeft', eventHandler, false)
-        .addEventListener('swipeRight', eventHandler, false)
-        .addEventListener('swipeUp', eventHandler, false)
-        .addEventListener('swipeDown', eventHandler, false);
+    //var eventHandler = function(e) {
+    //    e.preventDefault();
+    //    e.stopPropagation();
+    //    wrap.innerHTML = e.type;
+    //};
+    //wrap.addEventListener('tap', eventHandler, false)
+    //    .addEventListener('longTap', eventHandler, false)
+    //    .addEventListener('swipe', eventHandler, false)
+    //    .addEventListener('swipeLeft', eventHandler, false)
+    //    .addEventListener('swipeRight', eventHandler, false)
+    //    .addEventListener('swipeUp', eventHandler, false)
+    //    .addEventListener('swipeDown', eventHandler, false);
 
 //    document.body.live('tap', '.wrap', eventHandler)
 //        .live('click', '.wrap', eventHandler);
