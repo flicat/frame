@@ -7,6 +7,7 @@
 
 define(function(require, exports) {
     var log = require('log');
+    var ajax = require('ajax');
     var event = require('event');
     var popup = require('popup');
     var share = require('share');
@@ -40,17 +41,30 @@ define(function(require, exports) {
         seajs.data.cwd + 'images/icon-success.png',
         seajs.data.cwd + 'images/loading.gif'
     ];
-    var preloadImages = function(callback) {
-        var imgLen = imageURI.length;
-        imageURI.forEach(function(src) {
-            var img = new Image();
-            img.onload = img.onerror = function() {
-                imgLen--;
-                if(!imgLen){
-                    callback();
-                }
-            };
-            img.src = src;
+    // 预加载资源方法
+    var preLoadResource = function(arr, callback) {
+        var imgLen = arr.length;
+        var loadCallback = function() {
+            imgLen--;
+            if(imgLen < 1){
+                callback();
+            }
+        };
+        arr.forEach(function(src) {
+            if(/\.(png|jpg|gif)$/.test(src)) {
+                var img = new Image();
+                img.onload = img.onerror = loadCallback;
+                img.src = src;
+            } else {
+                ajax({
+                    type: 'GET',
+                    url: src,
+                    data: {},
+                    dataType: 'html',
+                    success: loadCallback,
+                    error: loadCallback
+                });
+            }
         });
     };
 
