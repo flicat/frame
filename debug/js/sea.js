@@ -23,6 +23,9 @@
         localStorage[version] = cacheName = version + '.' + Date.now();
     }
 
+    // 开启调试模式
+    var debug = decodeURI((location.search.substr(1).match(/(^|&)debug=([^&]*)(&|$)/) || [])[2] || '');
+
     seajs.config({
         charset: 'utf-8',
         base: './js/',
@@ -79,7 +82,7 @@
     };
 
     // 错误调试
-    seajs.use('log', function(log) {
+    debug && seajs.use('log', function(log) {
         window.onerror = function(msg, url , line){
             log("Error: " + msg, "URL: " + url, "Line: " + line);
             return false;
