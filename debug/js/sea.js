@@ -10,30 +10,17 @@
 (function(seajs) {
     // 版本号
     var version = '?v1.0.0';
-
-    // 清除页面缓存
-    var getNewFiles = function() {
-        [].slice.call(document.querySelectorAll('link[rel="stylesheet"], script[src]')).forEach(function(node) {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', node.href || node.src, true);
-            xhr.setRequestHeader('Content-Type', 'text/plain;charset=UTF-8');
-            xhr.setRequestHeader("If-Modified-Since", "0");
-            xhr.setRequestHeader("Cache-Control", "no-cache");
-            xhr.send();
-        });
-    };
+    localStorage['__cache_name__'] = version;
 
     var cacheName = localStorage[version];
     if(!cacheName){
-        cacheName = localStorage[version] = version;
-        getNewFiles();
+        localStorage[version] = cacheName =  version;
     }
 
     // 开启清缓存模式
     var clearCache = decodeURI((location.search.substr(1).match(/(^|&)cache=([^&]*)(&|$)/) || [])[2] || '');
     if(clearCache){
-        cacheName = localStorage[version] = version + '.' + Date.now();
-        getNewFiles();
+        localStorage[version] = cacheName = version + '.' + Date.now();
     }
 
     seajs.config({

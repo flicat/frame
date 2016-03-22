@@ -33,14 +33,14 @@
             console.log('MicroMessenger');
         }
     </script>
-    <link rel="stylesheet" href="css/index.css"/>
+    <script>document.write('<link rel="stylesheet" href="css/index.css' + (localStorage && localStorage[localStorage['__cache_name__'] || ''] || '') + '"/>')</script>
 </head>
 <body class="index">
     <img src="images/icon-success.png" id="success-image" class="success-image" alt=""/>
     <!--start wrap-->
     <div class="wrap" id="wrap"></div>
     <!--wrap end -->
-    <script src="js/sea.js"></script>
+    <script>document.write('<scr' + 'ipt src="js/sea.js' + (localStorage && localStorage[localStorage['__cache_name__'] || ''] || '') + '"></scri' + 'pt>')</script>
     <script>seajs.use('index')</script>
 </body>
 </html>
