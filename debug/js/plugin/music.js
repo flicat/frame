@@ -87,6 +87,16 @@ define(function (require, exports) {
                 } catch(e) {}
             }
         },
+        // 设置/获取音量大小
+        volume: function() {
+            if(arguments.length) {
+                var volume = Number(arguments[0]);
+                if(!isNaN(volume) && volume >= 0){
+                    this.audio.volume = volume;
+                }
+            }
+            return this.audio.volume;
+        },
         // 初始化事件
         init: function() {
             var that = this;
