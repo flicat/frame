@@ -34,7 +34,6 @@ define(function (require, exports) {
         this.audio = new Audio(src);
         this.audio.loop = !!loop;
         this.audio.autoplay = false;
-        this.audio.preload = 'auto';
 
         // 音乐播放图标
         this.icon = initMusicIcon();
