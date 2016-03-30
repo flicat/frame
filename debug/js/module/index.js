@@ -59,8 +59,6 @@ define(function(require, exports) {
                 ajax({
                     type: 'GET',
                     url: src,
-                    data: {},
-                    dataType: 'html',
                     success: loadCallback,
                     error: loadCallback
                 });
