@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cmn-Hans">
+<html lang="zh-cmn-Hans" manifest="cache.appcache">
 <head>
     <meta charset="utf-8">
     <!-- 启用 WebApp 全屏模式 -->
@@ -26,21 +26,20 @@
     <script type="text/javascript">
         // PC端判断代码
         if(/win|mac/ig.test(navigator.platform)){
-            console.log('PC');
+//            console.log('PC');
         }
         // 微信客户端判断代码
         if(/MicroMessenger/ig.test(navigator.userAgent)){
-            console.log('MicroMessenger');
+//            console.log('MicroMessenger');
         }
     </script>
-    <script>document.write('<link rel="stylesheet" href="css/index.css' + (localStorage && localStorage[localStorage['__cache_name__'] || ''] || '') + '"/>')</script>
+    <script src="js/config.js"></script>
 </head>
 <body class="index">
     <img src="images/icon-success.png" id="success-image" class="success-image" alt=""/>
     <!--start wrap-->
     <div class="wrap" id="wrap"></div>
     <!--wrap end -->
-    <script>document.write('<scr' + 'ipt src="js/sea.js' + (localStorage && localStorage[localStorage['__cache_name__'] || ''] || '') + '"></scri' + 'pt>')</script>
     <script>seajs.use('index')</script>
 </body>
 </html>

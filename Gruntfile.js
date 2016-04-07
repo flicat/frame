@@ -6,11 +6,20 @@ module.exports = function(grunt) {
 
         clean: {
             html: ["./*.html"],
+            cache: ["./*.appcache"],
             images: ["./images"],
             css: ["./css/*.css"],
             js: ["./js/*.js"],
             module: ["./js/module/*.js"],
             plugin: ["./js/plugin/*.js"]
+        },
+        copy: {
+            main: {
+                expand: true,
+                cwd: 'debug/',
+                src: ['*.appcache'],
+                dest: './'
+            }
         },
         imagemin: {                          // Task
             target: {                         // Another target
@@ -81,6 +90,10 @@ module.exports = function(grunt) {
                 files: 'debug/*.html',
                 tasks: ['newer:clean:html', 'newer:htmlmin']
             },
+            cache: {
+                files: 'debug/*.appcache',
+                tasks: ['newer:clean:cache', 'newer:copy']
+            },
             images: {
                 files: 'debug/images/*',
                 tasks: ['newer:clean:images', 'newer:imagemin']
@@ -104,6 +117,7 @@ module.exports = function(grunt) {
         }
     });
 
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -113,6 +127,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-newer');
 
     // 默认被执行的任务列表。
-    grunt.registerTask('default', ['clean', 'imagemin', 'htmlmin', 'uglify', 'cssmin', 'watch']);
+    grunt.registerTask('default', ['clean', 'copy', 'htmlmin', 'uglify', 'cssmin', 'imagemin', 'watch']);
 
 };

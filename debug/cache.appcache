@@ -1,0 +1,47 @@
+CACHE MANIFEST
+# v1.0.0
+
+js/config.js
+
+############# module ##############
+js/module/index.js
+
+############# plugin ##############
+js/plugin/ajax.js
+js/plugin/binaryajax.js
+js/plugin/event.js
+js/plugin/exif.js
+js/plugin/image-manage.js
+js/plugin/imagesloaded-pkgd.js
+js/plugin/jweixin-1.0.0.js
+js/plugin/log.js
+js/plugin/megapix-image.js
+js/plugin/music.js
+js/plugin/popup.js
+js/plugin/sea.js
+js/plugin/share.js
+js/plugin/template.js
+js/plugin/validate.js
+js/plugin/voice.js
+js/plugin/weixin.js
+
+############# css ##############
+css/index.css
+# css/page.css
+# css/animate.css
+# css/animation.css
+# css/layout.css
+# css/media.css
+# css/normalize.css
+# css/widget.css
+
+############# images ##############
+images/icon-success.png
+
+############# html ##############
+index.html
+
+NETWORK:
+*
+
+# FALLBACK:

@@ -106,7 +106,7 @@ define(function(require, exports) {
     img.addEventListener('touchmove', handler);
     img.addEventListener('touchcancel', handler);
     img.addEventListener('touchend', handler);
-    //img.addEventListener('swipe', handler);
+    img.addEventListener('swipe', handler);
 
     //var eventHandler = function(e) {
     //    e.preventDefault();
