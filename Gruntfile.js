@@ -50,6 +50,21 @@ module.exports = function(grunt) {
                 }]
             }
         },
+        less: {
+            dist: {
+                options: {                       // Target options
+                    strictMath: true,
+                    strictUnits: false
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'debug/less',
+                    src: ['*.less'],
+                    dest: 'debug/css',
+                    ext: '.css'
+                }]
+            }
+        },
         cssmin: {
             target: {
                 files: [{
@@ -98,6 +113,10 @@ module.exports = function(grunt) {
                 files: 'debug/images/*',
                 tasks: ['newer:clean:images', 'newer:imagemin']
             },
+            less: {
+                files: 'debug/less/*.less',
+                tasks: ['newer:less']
+            },
             css: {
                 files: 'debug/css/*.css',
                 tasks: ['newer:clean:css', 'newer:cssmin']
@@ -118,6 +137,7 @@ module.exports = function(grunt) {
     });
 
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -127,6 +147,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-newer');
 
     // 默认被执行的任务列表。
-    grunt.registerTask('default', ['clean', 'copy', 'htmlmin', 'uglify', 'cssmin', 'imagemin', 'watch']);
+    grunt.registerTask('default', ['clean', 'copy', 'htmlmin', 'uglify', 'less', 'cssmin', 'imagemin', 'watch']);
 
 };
