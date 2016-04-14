@@ -6,6 +6,22 @@
  * @description style 
  */
 
+// 公共css方法
+.transform(@value) {
+    -webkit-transform: @value;
+    transform: @value;
+}
+.transform-origin(@value) {
+    -webkit-transform-origin: @value;
+    transform-origin: @value;
+}
+.animation(@value) {
+    -webkit-animation: @value;
+    animation:         @value;
+}
+
+// CSS 代码
+
 html * {
     outline: 0;
     -webkit-text-size-adjust: none;
@@ -84,22 +100,6 @@ input {
     background: none;
     border: 0 none;
 }
-.btn-default,
-.btn-default:visited,
-.btn-default:active,
-.btn-default:hover,
-.btn-default:focus {
-    color: #aaa;
-    background: #eee;
-}
-.btn-primary,
-.btn-primary:visited,
-.btn-primary:active,
-.btn-primary:hover,
-.btn-primary:focus {
-    color: #aaa;
-    background: #fef;
-}
 .btn-wrap {
     text-align: center;
     width: 100%;
@@ -109,25 +109,19 @@ input {
     margin-left: 1.75rem;
 }
 /* icon-music */
-@-webkit-keyframes music {
+.music() {
     0% {
-        -webkit-transform: rotate(0deg);
-        transform:         rotate(0deg);
+        .transform(rotate(0deg));
     }
     100% {
-        -webkit-transform: rotate(360deg);
-        transform:         rotate(360deg);
+        .transform(rotate(360deg));
     }
 }
+@-webkit-keyframes music {
+    .music();
+}
 @keyframes music {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform:         rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(360deg);
-        transform:         rotate(360deg);
-    }
+    .music();
 }
 .icon-music {
     position: absolute;
@@ -139,12 +133,10 @@ input {
     display: block;
     background: url(../images/icon-music.png) no-repeat 50% 50%;
     background-size: 1rem 1rem;
-    -webkit-transform-origin: 50% 50%;
-    transform-origin:         50% 50%;
+    .transform-origin(50% 50%);
 }
 .icon-music-animation {
-    -webkit-animation: music 2s linear 0s infinite;
-    animation:         music 2s linear 0s infinite;
+    .animation(music 2s linear 0s infinite);
 }
 /* 弹窗
  **********************************************************************/

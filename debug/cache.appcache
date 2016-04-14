@@ -36,7 +36,7 @@ css/index.css
 # css/widget.css
 
 ############# images ##############
-images/icon-success.png
+images/icon-fail.png
 
 ############# html ##############
 index.html

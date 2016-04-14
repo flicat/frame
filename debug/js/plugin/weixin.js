@@ -40,7 +40,7 @@ define(function(require, exports) {
         };
 
         ajax({
-            type: 'POST',
+            type: 'GET',
             url: 'http://one.jcmob.cn/jssdk/get_signature2.do',
             data: param,
             dataType: 'jsonp',

@@ -80,22 +80,6 @@ input::-webkit-inner-spin-button {
   background: none;
   border: 0 none;
 }
-.btn-default,
-.btn-default:visited,
-.btn-default:active,
-.btn-default:hover,
-.btn-default:focus {
-  color: #aaa;
-  background: #eee;
-}
-.btn-primary,
-.btn-primary:visited,
-.btn-primary:active,
-.btn-primary:hover,
-.btn-primary:focus {
-  color: #aaa;
-  background: #fef;
-}
 .btn-wrap {
   text-align: center;
   width: 100%;
