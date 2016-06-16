@@ -11,87 +11,72 @@
 
 define(function(require, exports, module) {
     // HTML 节点
-    var type = '',
+    var popupType = '',
         popupElem = document.createElement('div'),
-        popupContentElem = document.createElement('div'),
-        popupCloseElem = document.createElement('i'),
-        popupMsgElem = document.createElement('span');
+        popupContentElem = document.createElement('div');
 
     popupElem.className = 'popup';
     popupContentElem.className = 'popup-content';
-    popupCloseElem.className = 'icon-close';
-    popupCloseElem.innerHTML = '&times;';
-    popupMsgElem.className = 'popup-msg';
 
-    popupContentElem.appendChild(popupCloseElem);
-    popupContentElem.appendChild(popupMsgElem);
     popupElem.appendChild(popupContentElem);
     document.body.appendChild(popupElem);
 
     // 显示/隐藏事件
-    popupElem.show = function(msg) {
-        popupMsgElem.innerHTML = msg || '';
+    popupElem.show = function(type, msg) {
+        popupType = type;
+        popupElem.className = 'popup popup-' + type;
         popupElem.style.display = '';
-
-        if(/i(Phone|P(o|a)d)/.test(navigator.userAgent)) {
-            document.body.scrollTop = 0;
-        }
+        popupContentElem.innerHTML = temp[type](msg);
+        typeof popupElem.onHide === 'function' && popupElem.onHide();
     };
     popupElem.hide = function() {
         popupElem.style.display = 'none';
-        typeof popupElem.onHide === 'function' && popupElem.onHide();
     };
 
     popupElem.hide();
 
     // 点击隐藏
-    if(/i(Phone|P(o|a)d)/.test(navigator.userAgent)) {
-        popupElem.style.position = 'absolute';
-        popupElem.style.left = '0px';
-        popupElem.style.top = '0px';
+    popupElem.addEventListener('click', function() {
+        popupType !== 'loading' && popupElem.hide();
+    }, false);
 
-        popupElem.addEventListener('touchstart', function(e) {
-            if(type !== 'loading'){
-                e.stopPropagation();
-                e.preventDefault();
-                popupElem.hide();
-            }
-        }, false);
-
-    } else {
-        popupElem.addEventListener('click', function() {
-            type !== 'loading' && popupElem.hide();
-        }, false);
-    }
+    // 弹窗模板
+    var temp = {
+        success: function(msg) {
+            return '<span class="popup-msg">' + msg + '</span>';
+        },
+        error: function(msg) {
+            return '<span class="popup-msg">' + msg + '</span>';
+        },
+        fail: function(msg) {
+            return '<span class="popup-msg">' + msg + '</span>';
+        },
+        loading: function() {
+            return '<div class="clock"></div>';
+        },
+        share: function() {
+            return '';
+        }
+    };
 
     module.exports = {
         success: function(msg, callback) {
-            type = 'success';
-            popupContentElem.className = 'popup-content popup-success';
-            popupElem.show(msg);
+            popupElem.show('success', msg);
             popupElem.onHide = callback;
         },
         error: function(msg, callback) {
-            type = 'error';
-            popupContentElem.className = 'popup-content popup-error';
-            popupElem.show(msg);
+            popupElem.show('error', msg);
             popupElem.onHide = callback;
         },
         fail: function(msg, callback) {
-            type = 'fail';
-            popupContentElem.className = 'popup-content popup-fail';
-            popupElem.show(msg);
+            popupElem.show('fail', msg);
             popupElem.onHide = callback;
         },
         loading: function(act) {
-            type = 'loading';
-            popupContentElem.className = 'popup-content popup-loading';
-            popupElem[act] && popupElem[act]();
+            popupElem[act] && popupElem[act]('loading');
         },
         share: function() {
-            type = 'share';
-            popupContentElem.className = 'popup-content popup-share';
-            popupElem.show();
+            popupElem.show('share');
         }
     }
 });

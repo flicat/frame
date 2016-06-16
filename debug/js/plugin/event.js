@@ -150,7 +150,7 @@ define(function (require, exports) {
                             diffX = point.diffX[i],
                             diffY = point.diffY[i];
 
-                        if(Math.abs(diffX) > 30 || Math.abs(diffY) > 30) {
+                        if(Math.abs(diffX) > 0 || Math.abs(diffY) > 0) {
                             if(Math.abs(diffX) < Math.abs(diffY) && diffY < 0){
                                 // 上滑屏
                                 node.trigger('swipeUp', point, e);

@@ -1,9 +1,9 @@
 @charset "utf-8";
 /*!
  * @author liyuelong1020@gmail.com
- * @date 15-6-19 下午2:44
+ * @date 2016/6/7
  * @version 1.0.0
- * @description style 
+ * @description js控件样式表
  */
 
 // 公共css方法
@@ -21,93 +21,6 @@
 }
 
 // CSS 代码
-
-html * {
-    outline: 0;
-    -webkit-text-size-adjust: none;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-/* 滚动条样式
- **********************************************************************/
-::-webkit-scrollbar-track,
-::-webkit-scrollbar {
-    width: 0.25rem;
-    border-radius: 10px;
-    background-color: #e4b5b7;
-}
-::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: #c11920;
-    background-image: -webkit-linear-gradient(bottom, #aa0e12, #cf313b);
-    background-image:         linear-gradient(to top, #aa0e12, #cf313b);
-}
-
-/* 隐藏原生滚动条
- **********************************************************************/
-::-webkit-scrollbar{
-    opacity: 0;
-}
-
-/* 公共组件
- **********************************************************************/
-.hide {
-    display: none !important;
-}
-.clear:after {
-    content: ' ';
-    display: block;
-    clear: both;
-    width: 0;
-    height: 0;
-}
-.text-hide {
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-indent: 110%;
-}
-
-/* 表单
- **********************************************************************/
-input {
-    -webkit-appearance: none;
-    &:focus,
-    &:active,
-    &:hover {
-        outline: 0 none;
-    }
-    &::-webkit-input-placeholder {
-        color: #9fa0a0;
-    }
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button{
-        -webkit-appearance: none !important;
-        margin: 0;
-    }
-}
-/* 按钮
- **********************************************************************/
-.btn,
-.btn:visited,
-.btn:active,
-.btn:hover,
-.btn:focus {
-    box-sizing: content-box;
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
-    white-space: nowrap;
-    background: none;
-    border: 0 none;
-}
-.btn-wrap {
-    text-align: center;
-    width: 100%;
-    padding: 0.8rem 0;
-}
-.btn-wrap .btn:not(:first-child) {
-    margin-left: 1.75rem;
-}
 /* icon-music */
 .music() {
     0% {
@@ -192,40 +105,95 @@ input {
         }
     }
 
-    .popup-success .popup-msg {
+    &.popup-success .popup-msg {
         background-image: url(../images/icon-success.png);
     }
-    .popup-fail .popup-msg,
-    .popup-error .popup-msg {
+    &.popup-error .popup-msg {
         background-image: url(../images/icon-fail.png);
     }
-    .popup-loading {
-        background: url(../images/loading.gif) no-repeat center center transparent;
-        background-size: 3em 3em;
+    &.popup-fail .popup-msg {
+        &:extend(.popup .popup-error .popup-msg);
     }
-    .popup-share {
-        background: url(../images/bg-share.png) no-repeat 0 0 transparent;
-        background-size: 100%;
-    }
-    .popup-share,
-    .popup-loading {
-        width: 100%;
-        height: 100%;
-        max-width: 100%;
-        padding: 0;
-    }
-    .popup-share .icon-close,
-    .popup-loading .icon-close {
-        display: none;
-    }
-    .popup-landscape {
-        background: #fff;
+    &.popup-loading {
+        background-color: transparent;
 
         .popup-content {
-            background: url(../images/bg-landscape.png) no-repeat  50% 0;
-            background-size: contain;
-            padding-top: 36%;
-            font: 400 0.6rem/1em 'sans-serif';
+            width: 4rem;
+            height: 4rem;
+            min-width: 0;
+            background-color: rgba(0,0,0,0.5);
+
+
+            .clock {
+                border-radius: 50%;
+                border: 0.25rem solid #fff;
+                height: 3rem;
+                width: 3rem;
+                margin: 0.35rem;
+                position: relative;
+
+                @-webkit-keyframes grdAiguille{
+                    0%{-webkit-transform:rotate(0deg);}
+                    100%{-webkit-transform:rotate(360deg);}
+                }
+
+                @keyframes grdAiguille{
+                    0%{transform:rotate(0deg);}
+                    100%{transform:rotate(360deg);}
+                }
+
+
+                @-webkit-keyframes ptAiguille {
+                    0%{-webkit-transform:rotate(0deg);}
+                    100%{-webkit-transform:rotate(360deg);}
+                }
+
+                @keyframes ptAiguille{
+                    0%{transform:rotate(0deg);}
+                    100%{transform:rotate(360deg);}
+                }
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    background-color: #fff;
+                    top: 0.125rem;
+                    left: 48%;
+                    height: 1.375rem;
+                    width: 0.25rem;
+                    border-radius: 0.25rem;
+                    -webkit-transform-origin: 50% 97%;
+                    transform-origin: 50% 97%;
+                    -webkit-animation: grdAiguille 1s linear infinite;
+                    animation:         grdAiguille 1s linear infinite;
+                }
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    background-color: #fff;
+                    top: 0.25rem;
+                    left: 48%;
+                    height: 1.25rem;
+                    width: 0.25rem;
+                    border-radius: 0.25rem;
+                    -webkit-transform-origin: 50% 94%;
+                    transform-origin: 50% 94%;
+                    -webkit-animation: ptAiguille 6s linear infinite;
+                    animation:         ptAiguille 6s linear infinite;
+                }
+
+            }
+
+
+        }
+    }
+    &.popup-share {
+        background: url(../images/bg-share.png) no-repeat 0 0 rgba(0, 0, 0, 0.8);
+        background-size: 100%;
+
+        .popup-content {
+            display: none;
         }
     }
 }
