@@ -41,12 +41,12 @@ define(function(require, exports) {
 
         ajax({
             type: 'GET',
-            url: 'http://one.jcmob.cn/jssdk/get_signature2.do',
+            url: 'http://wx2test.baiyjk.com/api/WechatShare/wxShareJson',
             data: param,
             dataType: 'jsonp',
             jsonp: callbackName,
             success: function(data) {
-                if(data && data.code && data.code === 'success'){
+                if(data && data.appid && data.signature){
                     // config信息验证失败会执行error函数，
                     wxsdk.error(function(res){
                         if(getTimes++ < 3){

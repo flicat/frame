@@ -50,7 +50,7 @@ define(function() {
         'number': '请输入数字！',
         'integer': '请输入整数！',
         'url': '请输入正确的网址！',
-        'password': '密码格式错误，请输入6到20个字符，必须包含数字和字母！',
+        'password': '密码格式错误，请输入6到18个字符！',
         'checkval': '两次输入的密码不一致！',
         'error': '格式错误！',
         'register': '该账号已经注册！',
@@ -74,7 +74,7 @@ define(function() {
         cn: /^[^u4e00-u9fa5\w~!@#$%^&*()_+{}:"<>?\-=[\];\',.\/]+$/ig,// 中文
         plus: /^[\+]?((\d+)([\.,](\d+))?|([\.,](\d+))?)$/,           // 正数
         url: /^[a-zA-z]+:\/\/(\w+(-\w+)*)(\.(\w+(-\w+)*))*/,         // 链接
-        password: /^[\w~!@#$%^&*()_+{}:"<>?\-=[\];\',.\/]{6,30}$/    // 密码
+        password: /^[\w~!@#$%^&*()_+{}:"<>?\-=[\];\',.\/]{6,18}$/    // 密码
     };
 
     // 表单验证规则
@@ -279,19 +279,27 @@ define(function() {
                 var nodeArr = elem.form[elem.name];
                 var lastNode = nodeArr[nodeArr.length - 1];
                 if(!lastNode.v_tip_node){
-                    elem.v_tip_node = lastNode.v_tip_node = document.createElement('em');
+                    elem.v_tip_node = lastNode.v_tip_node = document.createElement('span');
                     lastNode.parentNode.appendChild(elem.v_tip_node);
                 } else {
                     elem.v_tip_node = lastNode.v_tip_node;
                 }
             } else {
-                elem.v_tip_node = document.createElement('em');
+                elem.v_tip_node = document.createElement('span');
                 elem.parentNode.appendChild(elem.v_tip_node);
             }
+            elem.v_tip_node.className = 'error-msg';
         }
-        elem.v_tip_node.className = (rule == 'succeed') ? 'tips succeed' : 'tips error';
-        elem.v_tip_node.innerHTML = tip;
-        elem.focus();
+
+        if(rule == 'succeed'){
+            elem.v_tip_node.classList.add('hide');
+            elem.parentNode.classList.remove('error');
+        } else {
+            elem.v_tip_node.classList.remove('hide');
+            elem.parentNode.classList.add('error');
+            elem.v_tip_node.innerHTML = tip;
+            elem.focus();
+        }
     };
 
     HTMLFormElement.prototype.validateTip = validateTip;
