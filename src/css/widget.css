@@ -1,0 +1,296 @@
+@charset "utf-8";
+/*!
+ * @author liyuelong1020@gmail.com
+ * @date 2016/6/7
+ * @version 1.0.0
+ * @description js控件样式表
+ */
+/* icon-music */
+@-webkit-keyframes music {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes music {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.icon-music {
+  position: absolute;
+  top: 2.2rem;
+  left: 0;
+  z-index: 10;
+  width: 4rem;
+  height: 4rem;
+  display: block;
+  background: url(../images/icon-music.png?v1.0.0) no-repeat 50% 50%;
+  background-size: 1rem 1rem;
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+}
+.icon-music-animation {
+  -webkit-animation: music 2s linear 0s infinite;
+  animation: music 2s linear 0s infinite;
+}
+/* 弹窗
+ **********************************************************************/
+.popup {
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: box;
+  -webkit-box-pack: center;
+  box-pack: center;
+  -webkit-box-align: center;
+  box-align: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.popup .popup-content {
+  min-width: 40%;
+  max-width: 85%;
+  padding: 1.5rem;
+  text-align: center;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: .5rem;
+}
+.popup .popup-content .icon-close {
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  cursor: pointer;
+  display: block;
+  font: 400 0.5em/1.5em 'sans-serif';
+  font-style: normal;
+  width: 1.5em;
+  height: 1.5em;
+  color: #e94809;
+  border: 1px solid #e94809;
+  border-radius: 50%;
+}
+.popup .popup-content .popup-msg {
+  display: block;
+  width: 100%;
+  padding-top: 3.25rem;
+  text-align: center;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: 1.91666667rem 1.91666667rem;
+  color: #ffffff;
+  font-size: 1.08333333rem;
+}
+.popup .popup-content .popup-confirm-msg {
+  display: block;
+  padding: 1.5rem;
+  text-align: center;
+  color: #ffffff;
+  font-size: 1.08333333rem;
+}
+.popup .popup-content .popup-btn {
+  border-top: #fff solid 1px;
+  width: 100%;
+}
+.popup .popup-content .popup-btn a {
+  display: inline-block;
+  width: 50%;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  padding: 0.41666667rem 0;
+}
+.popup .popup-content .popup-btn a:nth-child(2) {
+  border-left: #fff solid 1px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.popup.popup-success .popup-msg {
+  background-image: url(../images/icon-success.png?v1.0.0);
+}
+.popup.popup-error .popup-msg {
+  background-image: url(../images/icon-fail.png?v1.0.0);
+}
+.popup.popup-loading {
+  background-color: transparent;
+}
+.popup.popup-loading .popup-content {
+  width: 4rem;
+  height: 4rem;
+  min-width: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.popup.popup-loading .popup-content .clock {
+  border-radius: 50%;
+  border: 0.25rem solid #fff;
+  height: 3rem;
+  width: 3rem;
+  margin: 0.35rem;
+  position: relative;
+}
+@-webkit-keyframes grdAiguille {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes grdAiguille {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.popup.popup-loading .popup-content .clock::after {
+  content: "";
+  position: absolute;
+  background-color: #fff;
+  top: 0.125rem;
+  left: 48%;
+  height: 1.375rem;
+  width: 0.25rem;
+  border-radius: 0.25rem;
+  -webkit-transform-origin: 50% 97%;
+  transform-origin: 50% 97%;
+  -webkit-animation: grdAiguille 1s linear infinite;
+  animation: grdAiguille 1s linear infinite;
+}
+.popup.popup-loading .popup-content .clock::before {
+  content: "";
+  position: absolute;
+  background-color: #fff;
+  top: 0.25rem;
+  left: 48%;
+  height: 1.25rem;
+  width: 0.25rem;
+  border-radius: 0.25rem;
+  -webkit-transform-origin: 50% 94%;
+  transform-origin: 50% 94%;
+  -webkit-animation: grdAiguille 6s linear infinite;
+  animation: grdAiguille 6s linear infinite;
+}
+.popup.popup-confirm .popup-content {
+  padding: 0;
+}
+/* 底部弹出选择菜单
+ *************************************************************/
+.popup-selector {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  font-size: 1.3rem;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.popup-selector .selector-content {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+}
+.popup-selector .selector-content .selector-bar {
+  width: 100%;
+  background-color: #eee ;
+}
+.popup-selector .selector-content .selector-bar::after {
+  content: ' ';
+  display: block;
+  clear: both;
+  width: 0;
+  height: 0;
+}
+.popup-selector .selector-content .selector-bar .btn-cancel,
+.popup-selector .selector-content .selector-bar .btn-confirm {
+  padding: 0.25em 0.5em;
+  margin: 0.5em;
+  font-size: 1em;
+  line-height: 1em;
+  color: #ef3c79;
+}
+.popup-selector .selector-content .selector-bar .btn-cancel {
+  float: left;
+}
+.popup-selector .selector-content .selector-bar .btn-confirm {
+  float: right;
+}
+.popup-selector .selector-content .selector-current {
+  position: absolute;
+  width: 100%;
+  height: 2em;
+  left: 0;
+  bottom: 4em;
+  border-top: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+}
+.popup-selector .selector-content .selector-row,
+.popup-selector .selector-content .selector-title {
+  box-sizing: border-box;
+  z-index: 0;
+  display: table;
+  width: 100%;
+  height: 2em;
+}
+.popup-selector .selector-content .selector-title span {
+  display: table-cell;
+  text-align: center;
+  padding: 0 1em;
+  vertical-align: middle;
+}
+.popup-selector .selector-content .selector-row {
+  position: relative;
+  height: 10em;
+}
+.popup-selector .selector-content .selector-row .selector-cell {
+  position: relative;
+  z-index: 1;
+  width: 33.33333333%;
+  height: 100%;
+  float: left;
+  text-align: center;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  /* 快速回弹滚动 */
+}
+.popup-selector .selector-content .selector-row .selector-cell::-webkit-scrollbar {
+  opacity: 0;
+}
+.popup-selector .selector-content .selector-row .selector-cell span {
+  display: block;
+  width: 100%;
+  font-size: 1em;
+  line-height: 2em;
+  height: 2em;
+  color: #999;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.popup-selector .selector-content .selector-row .selector-cell span.active {
+  color: #333;
+  font-weight: 900;
+}

@@ -1,0 +1,1 @@
+define("index",["ajax","popup","widget","mvvm","exbind"],function(require,exports){require("ajax"),require("popup"),require("widget"),require("mvvm"),require("exbind")});

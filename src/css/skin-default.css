@@ -1,0 +1,14 @@
+@charset "utf-8";
+/*!
+ * @author liyuelong1020@gmail.com
+ * @date 2016/6/7
+ * @description skin-default
+ */
+/* 按钮
+*******************************************************************/
+.btn-default {
+  background-color: #ff5a96;
+}
+.btn-disabled {
+  background-color: #d2d2d2;
+}

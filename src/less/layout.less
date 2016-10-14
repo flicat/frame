@@ -1,0 +1,334 @@
+@charset "utf-8";
+/*!
+ * @author liyuelong1020@gmail.com
+ * @date 2016/6/7
+ * @version 1.0.0
+ * @description layout
+ */
+
+@rem750: (750 / 320 * 12rem);
+@rem640: (640 / 320 * 12rem);
+
+.full-screen() {
+    width: 100%;
+    height: 100%;
+}
+html {
+    font: 400 3.75vw/1.5em 'RobotoRegular', 'Helvetica Neue' , 'sans-serif';
+}
+/* 一屏显示
+ **********************************************************************/
+html, body {
+    .full-screen();
+    overflow: hidden;
+}
+body {
+    position: relative;
+}
+html * {
+    outline: 0;
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+/* 链接
+ *********************************************************************/
+a,
+a:active,
+a:visited,
+a:focus,
+a:hover {
+    text-decoration: none;
+    outline: 0 none;
+}
+
+/* 列表
+ ****************************/
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* 滚动条样式
+**********************************************************************/
+//::-webkit-scrollbar-track,
+//::-webkit-scrollbar {
+    //width: 0.25rem;
+    //border-radius: 10px;
+    //background-color: #e4b5b7;
+//}
+//::-webkit-scrollbar-thumb {
+    //border-radius: 10px;
+    //background-color: #c11920;
+    //background-image: -webkit-linear-gradient(bottom, #aa0e12, #cf313b);
+    //background-image:         linear-gradient(to top, #aa0e12, #cf313b);
+//}
+
+/* 隐藏原生滚动条
+ **********************************************************************/
+//::-webkit-scrollbar{
+//    opacity: 0;
+//}
+
+/* 公共组件
+ **********************************************************************/
+.hide {
+    display: none !important;
+}
+.clear:after {
+    content: ' ';
+    display: block;
+    clear: both;
+    width: 0;
+    height: 0;
+}
+.text-hide {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-indent: 110%;
+}
+.pull-left {
+    float: left;
+}
+.pull-right {
+    float: right;
+}
+/* 使用内滚动
+ **********************************************************************/
+.scroll-wrap {
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;  /* 快速回弹滚动 */
+}
+
+/* 表单
+ **********************************************************************/
+form {
+    width: 100%;
+}
+label {
+    box-sizing: border-box;
+    height: (80 / 24rem);
+    line-height: (80 / 24rem);
+    border: 0 none;
+    font-size: 1rem;
+    color: #333;
+}
+input {
+    -webkit-appearance: none;
+    &:focus,
+    &:active,
+    &:hover {
+        outline: 0 none;
+    }
+    &::-webkit-input-placeholder {
+        color: #ddd;
+    }
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button{
+        -webkit-appearance: none !important;
+        margin: 0;
+    }
+
+
+    &[type="text"],
+    &[type="password"],
+    &[type="search"],
+    &[type="email"],
+    &[type="url"],
+    &[type="tel"],
+    &[type="number"] {
+        &:extend(label);
+        padding: 0 .75rem;
+        &:disabled {
+            color: #fff;
+            background-color: #d2d2d2;
+        }
+    }
+}
+.input-static {
+    &:extend(label);
+    padding: 0 .75rem;
+}
+
+.form-control {
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    background-color: #fff;
+    margin-bottom: 1px;
+
+    label {
+        text-indent: 0.75rem;
+    }
+    .verify-img {
+        display: inline-block;
+        width: auto;
+        height: (44 / 24rem);
+        margin-top: (18 / 24rem);
+        float: left;
+        border-left: 1px solid #ccc;
+    }
+    /* 开关按钮 */
+    .toggle-box {
+        margin-top: 0.7rem;
+        text-indent: 0;
+        float: left;
+    }
+    /* 密码可见/不可见 */
+    .toggle-psw {
+        // &:extend(.form-control .toggle-box);
+    }
+    .btn-sm {
+        margin-top: 0.3rem;
+    }
+    
+    
+
+    /* 表单验证错误 */
+    &.error {
+        outline: 1px solid #ff4e4e;
+        margin-bottom: 3rem;
+
+        .error-msg {
+            display: inline-block;
+            position: absolute;
+            left: 0;
+            top: 100%;
+            line-height: 3rem;
+            padding: 0 0.75rem;
+            color: #ff4e4e;
+        }
+    }
+
+    &::after {
+        &:extend(.clear:after);
+    }
+
+}
+
+
+/* icon
+ **********************************************************************/
+.icon {
+    display: inline-block;
+    margin-left: .5rem;
+    margin-right: .5rem;
+    vertical-align: text-top;
+}
+
+
+/* 按钮
+ **********************************************************************/
+.btn {
+    box-sizing: border-box;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    border: 0 none;
+    color: #fff;
+    width: 100%;
+    font: 400 1rem/1em 'sans-serif';
+    padding: (28 / 24em) (32 / 24em);
+    border-radius: (3 / 12rem);
+
+    &:visited,
+    &:active,
+    &:hover,
+    &:focus {
+        border: 0 none;
+        outline: 0 none;
+    }
+
+    &.btn-sm {
+        padding: (20 / 24em) (18 / 24em);
+    }
+}
+
+
+.btn-wrap {
+    text-align: center;
+    padding: 0 0.75rem;
+}
+.btn-wrap .btn:not(:first-child) {
+    margin-left: 1.75rem;
+}
+
+
+
+/* box 盒模型
+ **********************************************************************/
+.box {
+    display: -webkit-box;
+    display:         box;
+    -webkit-box-orient: vertical;
+    box-orient:         vertical;
+    -webkit-box-pack: center;
+    box-pack:         center;
+    -webkit-box-align: center;
+    box-align:         center;
+    -webkit-box-lines: single;
+    box-lines:         single;
+
+    .flex {
+        width: 100%;
+        height: auto;
+        position: relative;
+        -webkit-box-flex: 1;
+        box-flex:         1;
+        overflow: hidden;
+
+        .flex-content {
+            &:extend(.scroll-wrap);
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1;
+        }
+    }
+}
+
+
+
+/* 网格布局
+************************************************************************/
+.row {
+    display: block;
+    width: 100%;
+
+    &:after {
+        &:extend(.clear:after);
+    }
+
+    .columns(12);
+    .columns(@m, @j: 1) when (@j =< @m) {
+        .col-@{j} {
+            box-sizing: border-box;
+            float: left;
+            overflow: hidden;
+        }
+        .columns(@m, (@j + 1));
+    }
+
+    .columns-width(12);
+    .columns-width(@n, @i: 1) when (@i =< @n) {
+        .col-@{i} {
+            width: (@i * 100% / @n);
+        }
+        .columns-width(@n, (@i + 1));
+    }
+
+    .columns-offset(12);
+    .columns-offset(@n, @i: 1) when (@i =< @n) {
+        .col-offset-@{i} {
+            margin-left: (@i * 100% / @n);
+        }
+        .columns-offset(@n, (@i + 1));
+    }
+}
+
